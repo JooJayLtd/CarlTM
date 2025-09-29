@@ -1,0 +1,231 @@
+body {
+  font-family: Arial, sans-serif;
+  min-width: 300px;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  padding: 16px;
+}
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 12px;
+  text-align: center;
+  color: #A0A;
+}
+#add-group-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: #f3f0f7;
+  border-radius: 6px;
+  padding: 8px 10px;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(80, 80, 85, 0.08);
+}
+#group-label {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1em;
+  background: #fff;
+  color: #222;
+  outline: none;
+  transition: border 0.2s;
+}
+#group-label:focus {
+  border: 1.5px solid #A0A;
+}
+#add-group-form button[type="submit"] {
+  background: #A0A;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(80, 80, 85, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+#add-group-form button[type="submit"]:hover,
+#add-group-form button[type="submit"]:focus {
+  background: #6a36a6;
+  box-shadow: 0 2px 6px rgba(80, 80, 85, 0.13);
+}
+#add-group-form button[type="submit"]:active {
+  background: #3a034a;
+}
+#add-group-form button[type="submit"] span {
+  display: block;
+  line-height: 1;
+}
+.tally-group {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  margin-bottom: 12px;
+  padding: 10px;
+  border-left: 6px solid #A0A; /* default, overridden inline */
+}
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.group-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+}
+.add-tally,
+.delete-group {
+  margin-left: 0;
+}
+.group-label {
+  font-weight: bold;
+  flex: 1;
+  font-size: 1.35em;
+  letter-spacing: 0.01em;
+}
+.tally-badge {
+  display: inline-block;
+  min-width: 16px;
+  padding: 0 5px;
+  margin-left: 8px;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #fff;
+  background: var(--group-color, #A0A);
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(80,80,85,0.10);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4em;
+  position: relative;
+  top: -2px;
+  letter-spacing: 0.01em;
+}
+.group-count {
+  display: none;
+}
+.tally-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 4px;
+}
+.tally-group-5 {
+  display: inline-flex;
+  position: relative;
+  min-width: 28px;
+  height: 28px; /* increased for better visibility */
+  margin-right: 8px;
+  align-items: flex-end;
+}
+.tally-bar.v {
+  display: inline-block;
+  width: 3px;
+  height: 22px; /* increased for better overlap */
+  background: #333;
+  margin-right: 3px;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+}
+.tally-bar.v:last-child {
+  margin-right: 0;
+}
+.tally-bar.h {
+  position: absolute;
+  left: 0;
+  top: 12px; /* center the horizontal bar */
+  width: 100%;
+  height: 4px; /* thicker for visibility */
+  border-radius: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
+.add-tally {
+  background: #fff;
+  color: var(--group-color, #A0A);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(80, 80, 85, 0.10);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, filter 0.2s;
+  padding: 0;
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif, 'Segoe UI Symbol', 'Apple Color Emoji', 'Segoe UI Emoji';
+  z-index: 10;
+}
+.add-tally span {
+  color: var(--group-color, #A0A);
+  font-size: 1.6em;
+  font-weight: 900;
+  transition: color 0.2s;
+}
+.add-tally:hover,
+.add-tally:focus {
+  background: var(--group-color, #A0A);
+  color: #fff;
+  filter: brightness(1.15);
+  box-shadow: 0 2px 6px rgba(80, 80, 85, 0.13);
+}
+.add-tally:hover span,
+.add-tally:focus span {
+  color: #fff;
+}
+.add-tally:active {
+  background: #3a034a;
+  color: #fff;
+  filter: brightness(0.85);
+}
+.add-tally:active span {
+  color: #fff;
+}
+.delete-group {
+  background: #fff;
+  color: #c0392b;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.6em;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 1px 2px rgba(192, 57, 43, 0.10);
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif, 'Segoe UI Symbol', 'Apple Color Emoji', 'Segoe UI Emoji';
+  z-index: 10;
+}
+.delete-group:hover,
+.delete-group:focus {
+  background: #c0392b;
+  color: #fff;
+  filter: brightness(1.15);
+  box-shadow: 0 2px 6px rgba(192, 57, 43, 0.13);
+}
+.delete-group:active {
+  background: #922b1e;
+  color: #fff;
+  filter: brightness(0.85);
+}
