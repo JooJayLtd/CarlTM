@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Carl Tally Marks",
+  "name": "Carl's Tally Marks",
   "description": "Create and manage multiple tally counters with visual tally marks. Perfect for habit tracking, event counting, and score keeping.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "action": {
     "default_popup": "popup.html"
   },

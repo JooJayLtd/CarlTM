@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  min-width: 300px;
+  min-width: 450px;
   background: #f9f9f9;
   margin: 0;
   padding: 0;
@@ -73,7 +73,7 @@ h1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.07);
   margin-bottom: 12px;
   padding: 10px;
-  border-left: 6px solid #A0A; /* default, overridden inline */
+  border-left: 6px solid #A0A;
 }
 .group-header {
   display: flex;
@@ -88,21 +88,20 @@ h1 {
   margin-left: 8px;
 }
 .add-tally,
+.reset-group,
 .delete-group {
   margin-left: 0;
 }
 .group-label {
   font-weight: bold;
-  flex: 1;
-  font-size: 1.35em;
+  font-size: 1.2em;
   letter-spacing: 0.01em;
 }
 .tally-badge {
   display: inline-block;
-  min-width: 16px;
-  padding: 0 5px;
-  margin-left: 8px;
-  font-size: 0.75em;
+  min-width: 20px;
+  padding: 2px 8px;
+  font-size: 0.9em;
   font-weight: bold;
   color: #fff;
   background: var(--group-color, #A0A);
@@ -128,14 +127,14 @@ h1 {
   display: inline-flex;
   position: relative;
   min-width: 28px;
-  height: 28px; /* increased for better visibility */
+  height: 28px;
   margin-right: 8px;
   align-items: flex-end;
 }
 .tally-bar.v {
   display: inline-block;
   width: 3px;
-  height: 22px; /* increased for better overlap */
+  height: 22px;
   background: #333;
   margin-right: 3px;
   border-radius: 2px;
@@ -147,21 +146,74 @@ h1 {
 }
 .tally-bar.h {
   position: absolute;
-  left: 0;
-  top: 12px; /* center the horizontal bar */
-  width: 100%;
-  height: 4px; /* thicker for visibility */
-  border-radius: 2px;
+  left: -4px;
+  top: 20px;
+  width: calc(100% + 6px);
+  height: 3px;
+  border-radius: 1px;
   z-index: 2;
   pointer-events: none;
+  transform: rotate(-20deg);
+  transform-origin: left center;
+}
+.tally-bar.v.animate-new {
+  animation: drawVerticalNew 0.6s ease-out;
+  transform-origin: top;
+}
+.tally-bar.h.animate-new {
+  animation: drawHorizontalNew 0.8s ease-out;
+  transform-origin: left;
+}
+@keyframes drawVerticalNew {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@keyframes drawHorizontalNew {
+  0% {
+    transform: rotate(-20deg) scaleX(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotate(-20deg) scaleX(1);
+    opacity: 1;
+  }
+}
+.tally-group-5.new-tally {
+  animation: tallyGroupPulse 0.4s ease-out;
+}
+@keyframes tallyGroupPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .add-tally {
   background: #fff;
   color: var(--group-color, #A0A);
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,7 +227,7 @@ h1 {
 }
 .add-tally span {
   color: var(--group-color, #A0A);
-  font-size: 1.6em;
+  font-size: 1.2em;
   font-weight: 900;
   transition: color 0.2s;
 }
@@ -198,14 +250,45 @@ h1 {
 .add-tally:active span {
   color: #fff;
 }
+.reset-group {
+  background: #fff;
+  color: #f39c12;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1.2em;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 1px 2px rgba(243, 156, 18, 0.10);
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif, 'Segoe UI Symbol', 'Apple Color Emoji', 'Segoe UI Emoji';
+  z-index: 10;
+}
+.reset-group:hover,
+.reset-group:focus {
+  background: #f39c12;
+  color: #fff;
+  filter: brightness(1.15);
+  box-shadow: 0 2px 6px rgba(243, 156, 18, 0.13);
+}
+.reset-group:active {
+  background: #e67e22;
+  color: #fff;
+  filter: brightness(0.85);
+}
 .delete-group {
   background: #fff;
   color: #c0392b;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.6em;
+  width: 24px;
+  height: 24px;
+  font-size: 1.2em;
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -228,4 +311,91 @@ h1 {
   background: #922b1e;
   color: #fff;
   filter: brightness(0.85);
+}
+.group-label-container {
+  font-weight: bold;
+  flex: 1;
+  font-size: 1.2em;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 8px;
+}
+.group-label.editable {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+.group-label.editable:hover {
+  background-color: rgba(170, 170, 170, 0.1);
+}
+.group-label-input {
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 0.01em;
+  border: 2px solid #A0A;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background: #fff;
+  color: #222;
+  outline: none;
+  font-family: Arial, sans-serif;
+  min-width: 120px;
+}
+.group-label-input:focus {
+  border-color: #6a36a6;
+  box-shadow: 0 0 4px rgba(170, 170, 170, 0.3);
+}
+.color-chooser-btn {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.2s, opacity 0.2s;
+  margin: 0;
+  padding: 0;
+  opacity: 0.9;
+}
+
+.color-chooser-btn:hover {
+  transform: scale(1.1);
+  border-color: #999;
+  opacity: 1;
+}
+
+.color-chooser-btn:active {
+  transform: scale(0.95);
+  border-color: #6c757d;
+}
+.color-picker {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.color-option {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.2s;
+  margin: 0;
+  padding: 0;
+}
+
+.color-option:hover {
+  transform: scale(1.15);
+  border-color: #999;
+}
+
+.color-option:focus {
+  outline: 2px solid #A0A;
+  outline-offset: 2px;
 }
